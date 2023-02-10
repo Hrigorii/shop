@@ -1,0 +1,514 @@
+body {
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+*{
+	box-sizing: border-box;
+	outline: none;
+}
+.lock{
+	overflow: hidden;
+}
+ul, li{
+	padding: 0;
+	margin: 0;
+	list-style: none;
+}
+
+@mixin button{
+		transition: all 0.3s ease;
+		cursor: pointer;
+		width: 20px;
+		height: 20px;		
+		border: none;		
+		padding: 0px;
+		background-color: white;			
+		&:active{
+			transform: translateY(1px);			
+		}		
+		&:hover{
+			opacity: 1;
+		}
+}
+
+body, html{
+	width: 100%;
+	height: 100%;
+	background-color: burlywood;
+}
+
+.root{
+  height: 100%;
+  min-height: 100%;
+}
+
+.wrapper{
+	width: 90%;
+	min-height: 100%;
+	min-width: 400px;
+	display: flex;
+	flex-wrap: wrap;
+	align-content: flex-start;
+	margin: 20px auto;
+	padding: 20px;
+	border-radius: 20px;
+	box-sizing: border-box;
+	background-color: white;	
+}
+
+.header{		
+	width: 100%;
+	padding: 10px 20px;
+	display: flex;	
+	justify-content: space-between;
+	align-items: center;	
+	border-bottom: 1px solid  lightgray;
+	.logo{		
+		display: flex;
+		column-gap: 10px;
+		img{
+			cursor: pointer;
+		}
+		h1, p{			
+			margin: 10px 0px;
+		}
+		h1{
+			text-transform: uppercase;
+		}
+	}
+	.search{
+		position: relative;
+		input{
+			height: 30px;			
+			padding: 5px 23px 5px 30px;
+			border-radius: 20px;
+			border: none;	
+			background-color: lightgray;				
+		}
+		&::before{
+				color: black;
+				content: '';
+				position: absolute;
+				left: 7px;
+				top: 7px;
+				width: 16px;
+				height: 16px;				
+				background-image: url('../img/search.svg');
+			}
+		picture{
+			position: absolute;
+			top: 5px;
+			right: 5px;
+			&:hover{
+				color: red;
+			}	
+		}		
+		
+	}
+	.basket{
+		padding: 5px;			
+		border-radius: 20px;
+		display: flex;
+		background-color: orangered;
+		background-origin: border-box;
+		color: white;
+		cursor: pointer;
+		div {
+			padding: 0px 5px;			
+		}
+		&__price{
+			border-right: 1px solid white;
+		}
+		&__number {	
+			display: flex;
+			column-gap: 5px;
+		}		
+	}
+}
+
+@media(max-width:750px){
+	.header{
+		flex-wrap: wrap;
+		justify-content: space-between;
+		padding: 10px 0px;
+		.logo{
+			width: 100%;
+			justify-content:  center;
+		}		
+		.search input{
+			width: 200px;
+		}
+	}
+	
+}
+
+
+.main{
+	width: 100%;
+	flex: 1 1 auto;	
+	// position: relative;
+}
+.slider{}
+
+.nav{
+	display: flex;	
+	justify-content: space-between;
+	padding: 30px 40px;	
+	&__menu{
+		position: relative;		
+	}
+	.nav__lists{
+		display: flex;			
+		justify-content: space-between;
+		column-gap: 10px;	
+		a{
+			text-decoration: none;		
+			color: black;			
+		}		
+		.active{	
+			.nav__list{
+			background-color: black;
+			color: white;
+			}
+		}
+		.nav__list{
+			padding: 10px;
+			background-color: lightgray;
+			border: none;
+			border-radius: 20px;
+			cursor: pointer;
+			display: block;							
+		}
+	}
+	.nav__sort{	
+		margin-left: auto;		
+		display: flex;
+		cursor: pointer;
+		align-items:center;
+		select{
+			color: orangered;
+			padding: 5px;			
+			text-decoration: dashed underline;			
+			border: none;			
+			appearance: none;
+			background-color: white;
+			font-size: inherit;
+			cursor: pointer;				
+		}
+		.nav__chk{
+			display: none;
+		}
+		.nav__chk:checked+.nav__sort-label::before{
+			transform: rotate(180deg);
+		}
+		.nav__sort-label{
+			position: relative;
+			display: inline-flex;
+			padding: 5px;
+			cursor: pointer;
+			align-items: center;
+		}
+		.nav__sort-label::before{
+			content: '';			
+			width: 0;
+			height: 0;
+			border-left: 5px solid transparent;
+			border-right: 5px solid transparent;
+			border-top: 10px solid  black;					
+			margin: 0px 10px 0px 0px;
+		}
+	}
+}
+
+@media(max-width:990px){
+	.nav{
+		width: 100%;
+		position: relative;
+		align-items: flex-start;
+		padding: 20px 10px;
+		&__menu{
+			width: 200px;
+			position: absolute;
+			height: 42px;
+			overflow: hidden;								
+			.nav__lists{				
+				margin-top: 25px;
+				flex-direction: column;
+				row-gap: 5px;			
+			}
+			.nav__lists .active{
+				width: 100%;
+				position: absolute;
+				top: 0;
+				left: 0;
+			}
+		}		
+		&__menu:hover{						
+			height: auto;
+			&::before{				
+				transform: rotate(180deg);
+			}
+		}	
+		&__menu::before{
+			transition: all 0.4s ease;	
+			content: '';
+			display: inline-block;
+			position: relative;
+			top: 10px;
+			left: 170px;
+			width: 0;
+			height: 0;
+			border-left: 8px solid transparent;
+			border-right: 8px solid transparent;
+			border-top: 16px solid  white;					
+			margin: 0px 10px 0px 0px;
+			z-index: 1;
+		}	
+		
+	}
+	
+	.card{
+		justify-self: center;
+	}
+	
+}
+
+.main__content{
+	h1{
+		padding: 0px 0px 0px 40px;
+	}
+}
+.products{		
+	display: grid;
+	column-gap: 30px;
+	row-gap: 50px;
+	grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));	
+	grid-auto-rows: 1fr;
+}
+
+@keyframes rotate-img {
+	0% {
+		transform: rotate3d(0, 1, 0, 0deg);
+	}
+	100% {
+		transform: rotate3d(0, 1, 0, 360deg);
+	}
+}
+
+.card{
+	display: flex;
+	flex-direction: column;	
+	padding: 10px;
+	border-radius: 20px;
+	max-width: 300px;	
+	row-gap: 20px;
+	transition: all 0.3s ease;	
+	color: gray;
+	border: 1px solid #f2f2f2f2;		
+	&__img{		
+		align-self: center;		
+	}
+	&__img img:hover{
+		animation-name: rotate-img;
+		animation-duration: 3s;
+		animation-timing-function: ease;
+		animation-iteration-count: infinite;
+	}		
+	h2{
+		font-size: 24px;
+		color: black;	
+		margin: 10px 0px;
+		display: -webkit-box;
+		-webkit-line-clamp: 3;
+		-webkit-box-orient: vertical;  
+		overflow: hidden;
+	
+	}
+	.card__info{
+		margin-top: auto;		
+		li{
+			display: flex;
+			width: 100%;
+			justify-content: space-between;
+			margin-bottom: 10px;
+		}		
+	}
+	&__price-value{
+		color: black;
+		font-weight: 600;		
+	}
+
+	&__buton{
+		@include button();		
+	}	
+
+	&:hover{
+		transform: translateY(-5px);					
+	}
+}
+
+
+.cover{
+	position: absolute;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: rgba(0, 0, 0, 0.5);
+	visibility: hidden;
+	overflow: hidden;
+	opacity: 0;
+	transition: opacity 0.3s ease, visibility 0.3s ease;
+	&.visible{
+		visibility: visible;
+		opacity: 1;
+	}
+	z-index: 2;
+}
+
+.inside-basket{
+	position: absolute;
+	right: 0;
+	width: 350px;
+	height: 100%;
+	padding: 20px;
+	background-color: white;
+	z-index: 1;
+	display: flex;
+	flex-direction: column;
+	overflow: auto;
+	row-gap: 20px;
+	transform: translateX(100%);
+	transition: transform 0.5s ease;
+	
+	.close__buton{
+		@include button();
+		position: absolute;
+		right: 20px;
+		top: 20px;
+		color: black;		
+	}
+	h3{
+		margin: 0px 0px 20px 0px;
+	}
+	&.visible{
+		transform: translateX(0%);
+	}
+	&__img{			
+		margin-right: 10px;
+		align-self: center;	
+	}
+	&__card{
+		width: 100%;
+		display: flex;
+		column-gap: 10px;
+		.card__button{
+			@include button();
+			align-self: center;	
+			opacity: 0.4;	
+			color: red;			
+		}
+	}
+	&__info{
+		display: flex;		
+		flex-wrap: wrap;
+		justify-content: space-between;
+		h3{
+			width: 100%;			
+			margin: 0px 0px 10px 0px
+		}
+	}	
+	&__products{
+		flex: 1 1 auto;
+		display: flex;
+		flex-direction: column;
+		row-gap: 20px;
+		&.disabled{
+			background-image: url('../img/emptycart.png');
+			background-size: contain;
+			background-position: center;			
+			background-repeat: no-repeat;			
+		}
+	}
+	.basket-info{
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		margin: auto auto;
+		h1{
+			align-self: center;
+		}
+	}
+	
+}
+
+.buy{
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	row-gap: 10px;
+	transition: all 0.3s ease;
+	&__button{
+		@include button();
+		width: 80%;
+		height: 30px;
+		background-color: orangered;
+		border-radius: 20px;		
+		color: white;
+		font-weight: 600;		
+		margin: 0 auto;
+		opacity: 1;
+		&:disabled{
+			opacity: 0.5;
+			transform: none;
+			cursor: auto;
+		}		
+	}
+}
+
+.orders{
+	height: 100vh;
+	padding: 20px;
+	h2{
+		margin: 0px 0px 30px 0px;
+	}
+	&__content{
+		display: flex;
+		flex-direction: column;
+		row-gap: 20px;
+	}
+	&__order{
+		h2{
+			width: 100%;
+			border-bottom: 1px solid black;
+		}
+		display: flex;
+		flex-wrap: wrap;
+		column-gap: 20px;
+	}
+	
+}
+
+.mini-card{
+	width: 300px;
+	display: flex;
+	column-gap: 10px;		
+	&__img{			
+		margin-right: 10px;
+		align-self: center;	
+	}
+	&__info{
+		display: flex;		
+		flex-wrap: wrap;
+		justify-content: space-between;
+		h3{
+			width: 100%;			
+			margin: 0px 0px 10px 0px;
+		}
+	}	
+}
