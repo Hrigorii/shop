@@ -59,7 +59,7 @@ function App() {
 
         <main className="main">
           <Routes>
-            <Route path='/' element={<Navigate to='/products' replace />} />
+            <Route path='*' element={<Navigate to='/products' replace />} />
             <Route path='/' element={<Start />}>
               <Route path='products' element={<Products />} />
               <Route path='category/:name' element={<Products />} />
